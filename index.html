@@ -37,13 +37,13 @@
   --line:#372D31; --line-2:#4C3D43; --berry:#E3A6BC; --berry-d:#F0BCCB; --berry-p:#7E3A50;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;scroll-padding-top:96px}
 body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
 img{display:block;width:100%;height:auto}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer}
 .wrap{width:min(1160px,calc(100% - 48px));margin-inline:auto}
-.eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--berry)}
+.eyebrow{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--berry)}
 .rv{opacity:0;transform:translateY(16px);transition:opacity .75s ease,transform .75s ease}
 .rv.in{opacity:1;transform:none}
 .serif{font-family:var(--serif)}
@@ -56,11 +56,13 @@ button{font-family:inherit;cursor:pointer}
 [data-theme="dark"] .btn-quiet:hover{color:var(--berry-d)}
 
 /* header */
-.hdr{position:relative;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
+.hdr{position:sticky;top:0;z-index:30;background:var(--paper);border-bottom:1px solid var(--line)}
 .hdr-in{display:flex;align-items:center;justify-content:space-between;height:84px;color:var(--ink)}
-.brand{font-family:var(--serif);font-size:29px;letter-spacing:.01em;display:flex;align-items:center;gap:10px}
-.brand i{font-style:italic;color:var(--berry)}
-.nav{display:flex;gap:32px;font-size:13px;font-weight:500;color:var(--body)}
+.brand{font-family:var(--serif);font-size:28px;letter-spacing:.01em;display:flex;align-items:baseline;gap:2px}
+.brand i{color:var(--berry);font-style:normal}
+.nav{display:flex;gap:36px;font-size:13px;font-weight:500;color:var(--body)}
+.nav a{display:flex;align-items:baseline;gap:8px}
+.nav a i{font-family:var(--serif);font-style:italic;font-size:12px;color:var(--berry)}
 .nav a:hover{color:var(--ink);text-decoration:underline;text-underline-offset:5px}
 .hdr-act{display:flex;align-items:center;gap:12px}
 .tgl{width:40px;height:40px;border:1px solid var(--line-2);background:transparent;color:var(--ink);border-radius:50%;display:grid;place-items:center;font-size:16px;transition:border-color .2s,color .2s}
@@ -79,75 +81,104 @@ button{font-family:inherit;cursor:pointer}
 .hero-proof{display:flex;gap:20px;align-items:center;font-size:13px;color:var(--body);margin-top:28px;flex-wrap:wrap}
 .hero-proof .stars{color:var(--berry);letter-spacing:3px}
 .hero-proof b{font-weight:600;color:var(--ink)}
+.hero-loc{margin:12px 0 0;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--mute)}
 
-/* stat line */
-.facts{border-bottom:1px solid var(--line)}
-.facts-in{display:grid;grid-template-columns:repeat(4,1fr)}
-.fact{padding:30px 24px;border-right:1px solid var(--line)}
-.fact:last-child{border-right:0}
-.fact b{display:block;font-family:var(--serif);font-size:34px;font-weight:400;line-height:1}
-.fact span{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute)}
+/* service ticker */
+.tick{overflow:hidden;border-bottom:1px solid var(--line)}
+.tick-in{display:flex;width:max-content;animation:tick 34s linear infinite}
+.tick-set{display:flex;align-items:center;gap:44px;padding:13px 44px 13px 0}
+.tick-set span{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--mute);white-space:nowrap}
+.tick-set i{color:var(--berry);font-style:normal;font-size:8px}
+@keyframes tick{to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.tick-in{animation:none}}
 
-section{padding:104px 0}
+section{padding:110px 0}
 .lead{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:end;margin-bottom:56px}
 .lead h2{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5.5vw,74px);line-height:.98;letter-spacing:-.02em;margin:14px 0 0}
+.lead h2 em{font-style:italic;color:var(--berry)}
 .lead p{color:var(--body);font-size:15.5px;max-width:420px;margin:0}
 
-/* uniform image trio */
-.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+/* statement */
+.statement{display:grid;grid-template-columns:1.35fr .8fr;gap:40px;align-items:end}
+.statement h2{font-family:var(--serif);font-weight:400;font-size:clamp(52px,6.4vw,92px);line-height:.95;letter-spacing:-.03em;margin:14px 0 0}
+.statement h2 em{font-style:italic;color:var(--berry)}
+.statement p{color:var(--body);font-size:15.5px;max-width:360px;margin:0 0 10px;justify-self:end}
+
+/* zoomed, staggered image grids */
+.zoom{overflow:hidden;border-radius:2px}
+.zoom img{transition:transform .9s cubic-bezier(.2,.6,.2,1)}
+.zoom:hover img{transform:scale(1.045)}
+.cap{margin-top:14px;font-size:13px;color:var(--body)}
+.cap b{display:block;font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);line-height:1.25}
+.cap b i{font-style:italic;color:var(--berry);font-size:15px;margin-right:9px}
+.trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;align-items:start;margin-top:72px}
 .trio figure{margin:0}
-.trio img{aspect-ratio:4/5;object-fit:cover;border-radius:2px}
-.trio figcaption{margin-top:14px;font-size:13px;color:var(--body)}
-.trio figcaption b{display:block;color:var(--ink);font-family:var(--serif);font-size:22px;font-weight:400;line-height:1.2}
+.trio figure:nth-child(2){margin-top:48px}
+.trio img{aspect-ratio:4/5;object-fit:cover}
 
-/* services list */
+/* services */
 .svcs{border-top:1px solid var(--line)}
-.svc{display:grid;grid-template-columns:60px 1fr 190px 150px;gap:24px;align-items:center;padding:26px 6px;border-bottom:1px solid var(--line)}
+.svc{display:grid;grid-template-columns:56px 1fr 250px 150px 30px;gap:20px;align-items:center;padding:26px 10px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .2s}
 .svc:hover{background:var(--surface)}
-.svc .n{font-family:var(--serif);font-style:italic;font-size:20px;color:var(--berry-p)}
-.svc h3{font-family:var(--serif);font-weight:400;font-size:30px;margin:0;line-height:1.1}
+.svc .n{font-family:var(--serif);font-style:italic;font-size:18px;color:var(--berry)}
+.svc h3{font-family:var(--serif);font-weight:400;font-size:30px;margin:0;line-height:1.1;transition:transform .25s}
+.svc:hover h3{transform:translateX(6px)}
 .svc .d{font-size:13.5px;color:var(--body)}
-.svc .r{text-align:right;font-family:var(--serif);font-size:21px}
+.svc .r{text-align:right;font-family:var(--serif);font-size:21px;white-space:nowrap}
 .svc .r small{display:block;font-family:var(--sans);font-size:11px;color:var(--mute);text-decoration:line-through}
+.svc .go{font-size:16px;color:var(--berry);opacity:0;transform:translateX(-8px);transition:.25s;text-align:right}
+.svc:hover .go{opacity:1;transform:none}
 
-/* split feature */
-.split{display:grid;grid-template-columns:1fr 1fr;gap:0;align-items:stretch;border:1px solid var(--line)}
-.split-img img{height:100%;min-height:560px;object-fit:cover}
-.split-copy{padding:70px 62px;display:flex;flex-direction:column;justify-content:center;background:var(--surface)}
-.split-copy h2{font-family:var(--serif);font-weight:400;font-size:clamp(40px,4.6vw,62px);line-height:1;letter-spacing:-.02em;margin:14px 0 20px}
-.split-copy p{color:var(--body);font-size:15px;max-width:400px}
-.split-copy .btn{align-self:start;margin-top:18px}
+/* interior band with overlapping card */
+.band{padding:0;position:relative}
+.band>img{height:74vh;min-height:420px;object-fit:cover;object-position:center}
+.band-card{position:absolute;left:48px;bottom:48px;background:var(--paper);border:1px solid var(--line);padding:44px 46px;max-width:470px}
+.band-card h2{font-family:var(--serif);font-weight:400;font-size:clamp(36px,3.6vw,54px);line-height:1;margin:12px 0 18px}
+.band-card h2 em{color:var(--berry);font-style:italic}
+.band-card p{color:var(--body);font-size:14.5px;max-width:360px;margin:0 0 22px}
 
-/* real work band */
-.real{background:var(--surface)}
-.real .trio img{aspect-ratio:4/5}
+/* real work */
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;align-items:start}
+.four figure{margin:0}
+.four figure:nth-child(2),.four figure:nth-child(4){margin-top:36px}
+.four img{aspect-ratio:4/5;object-fit:cover}
 
 /* reviews */
-.revs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.rev{border:1px solid var(--line);padding:34px 30px;background:var(--paper);display:flex;flex-direction:column;min-height:250px}
+.quote{max-width:920px}
+.quote .stars{color:var(--berry);letter-spacing:3px;font-size:14px}
+.quote blockquote{font-family:var(--serif);font-size:clamp(30px,3.6vw,50px);line-height:1.12;margin:20px 0 22px;letter-spacing:-.01em}
+.quote footer{font-size:13px;color:var(--mute)}
+.quote footer b{color:var(--ink);font-weight:600}
+.revs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:56px}
+.rev{border:1px solid var(--line);padding:34px 30px;background:var(--paper);display:flex;flex-direction:column;min-height:220px}
 .rev .stars{color:var(--berry);letter-spacing:2px;font-size:13px}
-.rev blockquote{font-family:var(--serif);font-size:24px;line-height:1.28;margin:18px 0 24px}
-.rev footer{margin-top:auto;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--mute)}
-.rev footer b{color:var(--ink)}
+.rev blockquote{font-family:var(--serif);font-size:23px;line-height:1.3;margin:16px 0 22px}
+.rev footer{margin-top:auto;border-top:1px solid var(--line);padding-top:14px;font-size:12px;color:var(--mute)}
+.rev footer b{color:var(--ink);font-weight:600}
 
 /* location */
 .loc{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
 .loc h2{font-family:var(--serif);font-weight:400;font-size:clamp(44px,5vw,68px);line-height:1;margin:12px 0 26px}
 .loc .row{display:grid;grid-template-columns:100px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:14px}
 .loc .row b{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mute);padding-top:3px}
-.loc img{height:440px;object-fit:cover;border-radius:2px}
+.loc .zoom img{height:480px;object-fit:cover}
 
 /* closing */
 .close{background:var(--berry);color:#FFF6F8;text-align:center;padding:96px 0}
 [data-theme="dark"] .close{background:#5E2438}
+.close .eyebrow{color:inherit;opacity:.8}
 .close h2{font-family:var(--serif);font-weight:400;font-size:clamp(52px,7vw,92px);line-height:.95;margin:14px 0 20px}
+.close h2 em{font-style:italic}
 .close p{opacity:.88;margin:0 auto 30px;max-width:440px;font-size:15px}
 .close .btn{background:#FFF6F8;color:#6E2A43;border-color:#FFF6F8}
 .close .btn:hover{background:#fff}
 [data-theme="dark"] .close .btn{background:#1B1216;color:#FFF6F8;border-color:#1B1216}
 
-footer{padding:40px 0;border-top:1px solid var(--line);font-size:12px;color:var(--mute)}
-.foot-in{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+/* footer with giant wordmark */
+footer{padding:64px 0 26px;overflow:hidden}
+.foot-top{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-size:12px;color:var(--mute);padding-bottom:8px}
+.foot-mark{font-family:var(--serif);font-size:clamp(56px,16vw,250px);line-height:.8;letter-spacing:-.045em;color:var(--ink);margin-top:44px;white-space:nowrap}
+.foot-mark i{color:var(--berry);font-style:normal}
 
 /* dialog + mobile bar */
 dialog{border:0;padding:0;background:transparent;max-width:100%}
@@ -169,15 +200,22 @@ textarea{min-height:82px;resize:vertical}
   .hero{grid-template-columns:1fr;grid-template-rows:auto;height:auto;min-height:0;max-height:none}
   .hero picture{order:-1;height:52vh;min-height:320px}
   .hero img{object-position:50% 22%}
-  .lead,.loc,.split{grid-template-columns:1fr;gap:30px}
-  .split-img img{min-height:380px}
-  .split-copy{padding:44px 28px}
-  .facts-in{grid-template-columns:1fr 1fr}
-  .fact:nth-child(2){border-right:0}
-  .fact:nth-child(-n+2){border-bottom:1px solid var(--line)}
-  .trio,.revs{grid-template-columns:1fr 1fr}
-  .svc{grid-template-columns:36px 1fr 120px;gap:14px}
-  .svc .d{display:none}
+  .hero-in{padding:40px 24px 56px}
+  .statement{grid-template-columns:1fr;gap:24px}
+  .statement p{justify-self:start}
+  .lead,.loc{grid-template-columns:1fr;gap:30px}
+  .trio{grid-template-columns:1fr 1fr;margin-top:48px}
+  .trio figure:nth-child(2){margin-top:28px}
+  .four{grid-template-columns:1fr 1fr}
+  .four figure:nth-child(2),.four figure:nth-child(4){margin-top:28px}
+  .svcs{border-top:0}
+  .svc{grid-template-columns:40px 1fr 120px;gap:14px}
+  .svc .d,.svc .go{display:none}
+  .svc h3{font-size:25px}
+  .band>img{height:52vh;min-height:340px}
+  .band-card{position:relative;left:auto;bottom:auto;margin:-84px 20px 0;padding:34px 28px;max-width:none}
+  .quote blockquote{font-size:clamp(28px,6.4vw,40px)}
+  .loc img{height:340px}
   section{padding:72px 0}
   .mbar{display:flex;position:fixed;z-index:35;left:0;right:0;bottom:0;background:var(--paper);border-top:1px solid var(--line);padding:10px 14px;gap:10px;align-items:center}
   .mbar div{flex:1;min-width:0}
@@ -185,23 +223,24 @@ textarea{min-height:82px;resize:vertical}
   .mbar span{font-size:11px;color:var(--mute)}
   .mbar .btn{padding:11px 14px;font-size:12px}
   footer{padding-bottom:100px}
+  .foot-mark{margin-top:32px}
 }
 @media(max-width:600px){
   .wrap{width:calc(100% - 36px)}
   .hdr-in{height:70px}
   .brand{font-size:24px}
   .hdr-book{display:none}
-  .hero h1{font-size:clamp(54px,14vw,80px)}
-  .hero-in{padding:40px 24px 56px}
+  .hero h1{font-size:clamp(44px,13.5vw,60px)}
   .hero-sub{font-size:14px}
-  .trio,.revs{grid-template-columns:1fr}
+  .trio,.revs,.four{grid-template-columns:1fr}
+  .trio figure:nth-child(2),.four figure:nth-child(2),.four figure:nth-child(4){margin-top:0}
   .svc{grid-template-columns:30px 1fr auto;gap:10px;padding:20px 2px}
-  .svc h3{font-size:25px}
   .svc .r{font-size:17px}
   .loc img{height:320px}
   .loc .row{grid-template-columns:88px 1fr}
   .fr{grid-template-columns:1fr}
   .dlg{padding:26px 18px}
+  .band-card{margin:-64px 14px 0;padding:28px 22px}
 }
 @media(max-width:380px){
   .brand{font-size:21px}
@@ -215,9 +254,12 @@ noscript .rv{opacity:1!important;transform:none!important}
 
 <header class="hdr">
   <div class="wrap hdr-in">
-    <a class="brand" href="#top">Cloudnine <i>.</i></a>
+    <a class="brand" href="#top">Cloudnine<i>.</i></a>
     <nav class="nav">
-      <a href="#services">Services</a><a href="#work">Our work</a><a href="#reviews">Reviews</a><a href="#visit">Visit</a>
+      <a href="#services"><i>01</i>Services</a>
+      <a href="#work"><i>02</i>Our work</a>
+      <a href="#reviews"><i>03</i>Reviews</a>
+      <a href="#visit"><i>04</i>Visit</a>
     </nav>
     <div class="hdr-act">
       <button class="tgl" id="themeBtn" aria-label="Toggle colour theme">☾</button>
@@ -227,10 +269,11 @@ noscript .rv{opacity:1!important;transform:none!important}
 </header>
 
 <main id="top">
+
   <section class="hero">
     <picture>
       <source media="(max-width:900px)" srcset="assets/hero-portrait.webp">
-      <img src="assets/hero.webp" alt="A finished salon look" width="2200" height="1400" fetchpriority="high">
+      <img src="assets/hero.webp" alt="A finished salon look at Cloudnine" width="2200" height="1400" fetchpriority="high">
     </picture>
     <div class="hero-in">
       <span class="eyebrow">Wellawatte · Colombo 06</span>
@@ -243,82 +286,85 @@ noscript .rv{opacity:1!important;transform:none!important}
         <span>·</span>
         <span>1,166 photos of real work</span>
       </div>
+      <p class="hero-loc">67 W.A. Silva Mawatha — open daily from 8:30 am</p>
     </div>
   </section>
 
-  <div class="facts">
-    <div class="wrap facts-in">
-      <div class="fact"><b>4.8</b><span>Google rating</span></div>
-      <div class="fact"><b>601</b><span>Reviews</span></div>
-      <div class="fact"><b>8:30</b><span>Opens daily</span></div>
-      <div class="fact"><b>06</b><span>Colombo district</span></div>
+  <div class="tick" aria-hidden="true">
+    <div class="tick-in">
+      <div class="tick-set"><span>Hair</span><i>●</i><span>Skin</span><i>●</i><span>Nails</span><i>●</i><span>Bridal &amp; mehndi</span><i>●</i><span>Spa pedicure</span><i>●</i><span>Luxury pedicure</span><i>●</i><span>Walk-ins welcome</span><i>●</i></div>
+      <div class="tick-set"><span>Hair</span><i>●</i><span>Skin</span><i>●</i><span>Nails</span><i>●</i><span>Bridal &amp; mehndi</span><i>●</i><span>Spa pedicure</span><i>●</i><span>Luxury pedicure</span><i>●</i><span>Walk-ins welcome</span><i>●</i></div>
     </div>
   </div>
 
   <section>
-    <div class="wrap">
-      <div class="lead rv">
-        <div><span class="eyebrow">The salon</span><h2>A good day<br>starts here.</h2></div>
+    <div class="wrap rv">
+      <div class="statement">
+        <div>
+          <span class="eyebrow">The salon</span>
+          <h2>A good day<br><em>starts here.</em></h2>
+        </div>
         <p>From a quick thread to a full bridal look — everything happens in one calm place on Galle Road. Come as you are, leave feeling like yourself, only sharper.</p>
       </div>
-      <div class="trio rv">
-        <figure><img src="assets/facial.webp" alt="A relaxing facial treatment" width="1200" height="1500"><figcaption><b>Skin</b>Facials and little rituals that make a week feel lighter.</figcaption></figure>
-        <figure><img src="assets/coloring.webp" alt="Hair colouring in progress" width="1200" height="1500"><figcaption><b>Hair</b>Cuts, colour and styling — the finished look is the point.</figcaption></figure>
-        <figure><img src="assets/style.webp" alt="A finished hairstyle" width="1200" height="1500"><figcaption><b>Bridal</b>Wedding and graduation makeup, done with care.</figcaption></figure>
+      <div class="trio">
+        <figure><div class="zoom"><img src="assets/facial.webp" alt="A relaxing facial treatment" width="1200" height="1500" loading="lazy"></div><figcaption class="cap"><b><i>01</i>Skin</b>Facials and little rituals that make a week feel lighter.</figcaption></figure>
+        <figure><div class="zoom"><img src="assets/coloring.webp" alt="Hair colouring in progress" width="1200" height="1500" loading="lazy"></div><figcaption class="cap"><b><i>02</i>Hair</b>Cuts, colour and styling — the finished look is the point.</figcaption></figure>
+        <figure><div class="zoom"><img src="assets/style.webp" alt="A finished hairstyle" width="1200" height="1500" loading="lazy"></div><figcaption class="cap"><b><i>03</i>Bridal</b>Wedding and graduation makeup, done with care.</figcaption></figure>
       </div>
     </div>
   </section>
 
   <section id="services" style="padding-top:0">
     <div class="wrap">
-      <div class="lead rv" style="margin-bottom:34px">
-        <div><span class="eyebrow">What we do</span><h2>Services.</h2></div>
+      <div class="lead rv" style="margin-bottom:40px">
+        <div><span class="eyebrow">What we do</span><h2>Services<em>.</em></h2></div>
         <p>Some of what we're known for. Message us for anything else — we'll tell you honestly if we can do it.</p>
       </div>
       <div class="svcs rv">
-        <div class="svc"><span class="n">01</span><h3>Hair</h3><span class="d">Cuts, colour, smoothing, styling</span><span class="r">Enquire</span></div>
-        <div class="svc"><span class="n">02</span><h3>Facials &amp; skin</h3><span class="d">Hot oil massage, gold facial</span><span class="r">Enquire</span></div>
-        <div class="svc"><span class="n">03</span><h3>Nails</h3><span class="d">Manicures, extensions, nail art</span><span class="r">Rs. 4,999<small>Rs. 8,000</small></span></div>
-        <div class="svc"><span class="n">04</span><h3>Spa pedicure</h3><span class="d">A proper unwind</span><span class="r">Rs. 5,999<small>Rs. 8,500</small></span></div>
-        <div class="svc"><span class="n">05</span><h3>Luxury pedicure</h3><span class="d">The longer version</span><span class="r">Rs. 10,999<small>Rs. 12,800</small></span></div>
-        <div class="svc"><span class="n">06</span><h3>Bridal &amp; mehndi</h3><span class="d">Wedding and graduation</span><span class="r">By booking</span></div>
+        <div class="svc" data-book data-service="Hair" tabindex="0"><span class="n">01</span><h3>Hair</h3><span class="d">Cuts, colour, smoothing, styling</span><span class="r">Enquire</span><span class="go">↗</span></div>
+        <div class="svc" data-book data-service="Facial / skin" tabindex="0"><span class="n">02</span><h3>Facials &amp; skin</h3><span class="d">Hot oil massage, gold facial</span><span class="r">Enquire</span><span class="go">↗</span></div>
+        <div class="svc" data-book data-service="Nails" tabindex="0"><span class="n">03</span><h3>Nails</h3><span class="d">Manicures, extensions, nail art</span><span class="r">Rs. 4,999<small>Rs. 8,000</small></span><span class="go">↗</span></div>
+        <div class="svc" data-book data-service="Spa pedicure" tabindex="0"><span class="n">04</span><h3>Spa pedicure</h3><span class="d">A proper unwind</span><span class="r">Rs. 5,999<small>Rs. 8,500</small></span><span class="go">↗</span></div>
+        <div class="svc" data-book data-service="Luxury pedicure" tabindex="0"><span class="n">05</span><h3>Luxury pedicure</h3><span class="d">The longer version</span><span class="r">Rs. 10,999<small>Rs. 12,800</small></span><span class="go">↗</span></div>
+        <div class="svc" data-book data-service="Bridal makeup" tabindex="0"><span class="n">06</span><h3>Bridal &amp; mehndi</h3><span class="d">Wedding and graduation</span><span class="r">By booking</span><span class="go">↗</span></div>
       </div>
     </div>
   </section>
 
-  <section class="split rv">
-    <div class="split-img"><img src="assets/interior.webp" alt="Inside a calm, modern beauty salon" width="2200" height="900"></div>
-    <div class="split-copy">
+  <section class="band rv">
+    <img src="assets/interior.webp" alt="Inside a calm, modern beauty salon" width="2200" height="900" loading="lazy">
+    <div class="band-card">
       <span class="eyebrow">Your time, properly spent</span>
-      <h2>Sit back.<br>It's handled.</h2>
+      <h2>Sit back.<br><em>It's handled.</em></h2>
       <p>We know the small things matter — the music, the chair, the way someone listens when you say "not too short". That's what 601 people came back for.</p>
       <button class="btn" data-book>See available slots ↗</button>
     </div>
   </section>
 
-  <section class="real" id="work">
+  <section id="work">
     <div class="wrap">
       <div class="lead rv">
-        <div><span class="eyebrow">From our own camera</span><h2>Real work.<br>Real clients.</h2></div>
+        <div><span class="eyebrow">From our own camera</span><h2>Real work.<br><em>Real clients.</em></h2></div>
         <p>These four are from our own Google listing — our salon, our hands, our clients. Not stock photography.</p>
       </div>
-      <div class="trio rv" style="grid-template-columns:repeat(4,1fr)">
-        <figure><img src="assets/real-hair.webp" alt="A client's finished hairstyle at Cloudnine" width="1200" height="1500"><figcaption><b>Hair</b>Finished look</figcaption></figure>
-        <figure><img src="assets/real-nails.webp" alt="Nails being done at Cloudnine" width="1200" height="1500"><figcaption><b>Nails</b>In progress</figcaption></figure>
-        <figure><img src="assets/real-treatment.webp" alt="A treatment at Cloudnine" width="1200" height="1500"><figcaption><b>Skin</b>Treatment</figcaption></figure>
-        <figure><img src="assets/real-mehndi.webp" alt="Bridal mehndi by Cloudnine" width="1200" height="1500"><figcaption><b>Mehndi</b>Bridal detail</figcaption></figure>
+      <div class="four rv">
+        <figure><div class="zoom"><img src="assets/real-hair.webp" alt="A client's finished hairstyle at Cloudnine" width="1200" height="1500" loading="lazy"></div><figcaption class="cap"><b><i>04</i>Hair</b>Finished look</figcaption></figure>
+        <figure><div class="zoom"><img src="assets/real-nails.webp" alt="Nails being done at Cloudnine" width="1200" height="1500" loading="lazy"></div><figcaption class="cap"><b><i>05</i>Nails</b>In progress</figcaption></figure>
+        <figure><div class="zoom"><img src="assets/real-treatment.webp" alt="A treatment at Cloudnine" width="1200" height="1500" loading="lazy"></div><figcaption class="cap"><b><i>06</i>Skin</b>Treatment</figcaption></figure>
+        <figure><div class="zoom"><img src="assets/real-mehndi.webp" alt="Bridal mehndi by Cloudnine" width="1200" height="1500" loading="lazy"></div><figcaption class="cap"><b><i>07</i>Mehndi</b>Bridal detail</figcaption></figure>
       </div>
     </div>
   </section>
 
   <section id="reviews">
-    <div class="wrap">
-      <div class="lead rv">
-        <div><span class="eyebrow">Google reviews</span><h2>Kind words.</h2></div>
-        <p>Real words from our Google listing — including the replies from our team.</p>
+    <div class="wrap rv">
+      <span class="eyebrow">Google reviews</span>
+      <div class="quote">
+        <span class="stars">★★★★★</span>
+        <blockquote>"Bharathy did an absolutely amazing job. Professional, gentle and very attentive."</blockquote>
+        <footer><b>Mayuri Cumaraswamy</b> · 2 weeks ago — owner replied: "Thank you so much"</footer>
       </div>
-      <div class="revs rv">
-        <article class="rev"><span class="stars">★★★★★</span><blockquote>"Bharathy did an absolutely amazing job. Professional, gentle and very attentive."</blockquote><footer><b>Mayuri Cumaraswamy</b> · 2 weeks ago<br>Owner replied: "Thank you so much"</footer></article>
+      <div class="revs">
         <article class="rev"><span class="stars">★★★★★</span><blockquote>"I came from Jaffna and chose your salon after seeing your reviews. I was very satisfied with the service."</blockquote><footer><b>Thalini</b> · 2 months ago<br>Owner replied: "Thank you 😊"</footer></article>
         <article class="rev"><span class="stars">★★★★★</span><blockquote>"My second lovely experience — first my farewell hairstyle, then my nails. Both turned out beautifully."</blockquote><footer><b>Mathusha Sivakumar</b> · 2 weeks ago</footer></article>
       </div>
@@ -336,23 +382,30 @@ noscript .rv{opacity:1!important;transform:none!important}
         <div class="row"><b>Booking</b><span>WhatsApp — we reply as soon as we can</span></div>
         <button class="btn" style="margin-top:26px" data-book>Book on WhatsApp ↗</button>
       </div>
-      <div class="rv">
-        <img src="assets/result.webp" alt="A finished look from Cloudnine" width="1200" height="1500">
+      <div class="rv zoom">
+        <img src="assets/result.webp" alt="A finished look from Cloudnine" width="1200" height="1500" loading="lazy">
       </div>
     </div>
   </section>
 
   <section class="close">
     <div class="wrap">
-      <span class="eyebrow" style="color:inherit;opacity:.8">Your appointment</span>
-      <h2>Let's make it happen.</h2>
+      <span class="eyebrow">Your appointment</span>
+      <h2>Let's make it <em>happen.</em></h2>
       <p>Tell us what you need and when. We'll confirm on WhatsApp — no forms, no waiting.</p>
       <button class="btn" data-book>Message Cloudnine ↗</button>
     </div>
   </section>
 </main>
 
-<footer><div class="wrap foot-in"><span>© Cloudnine Beauty Salon · 67 W.A. Silva Mawatha, Colombo 06</span><span>Design sample · 077 780 3082</span></div></footer>
+<footer>
+  <div class="wrap foot-top">
+    <span>© Cloudnine Beauty Salon</span>
+    <span>67 W.A. Silva Mawatha, Colombo 06</span>
+    <span>077 780 3082 · Open daily 8:30</span>
+  </div>
+  <div class="wrap"><div class="foot-mark">Cloudnine<i>.</i></div></div>
+</footer>
 
 <div class="mbar"><div><b>Cloudnine Beauty</b><span>4.8 ★ from 601 reviews</span></div><button class="btn" data-book>Book now ↗</button></div>
 
@@ -385,7 +438,15 @@ noscript .rv{opacity:1!important;transform:none!important}
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.08});
   document.querySelectorAll('.rv').forEach(function(e){io.observe(e)});
   var d=document.getElementById('bookDialog');
-  document.querySelectorAll('[data-book]').forEach(function(el){el.addEventListener('click',function(ev){ev.preventDefault();if(d.showModal)d.showModal();else d.setAttribute('open','')})});
+  document.querySelectorAll('[data-book]').forEach(function(el){
+    el.addEventListener('click',function(ev){
+      ev.preventDefault();
+      var s=el.getAttribute('data-service');
+      if(s)document.getElementById('service').value=s;
+      if(d.showModal)d.showModal();else d.setAttribute('open','');
+    });
+    el.addEventListener('keydown',function(ev){if(ev.key==='Enter'){ev.preventDefault();el.click()}});
+  });
   function close(){if(d.close)d.close();else d.removeAttribute('open')}
   document.getElementById('closeDlg').addEventListener('click',close);
   document.getElementById('cancelBtn').addEventListener('click',close);
